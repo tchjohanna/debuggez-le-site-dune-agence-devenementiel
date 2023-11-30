@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { useData } from "../../contexts/DataContext";
 import { getMonth } from "../../helpers/Date";
+import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
+
 import "./style.scss";
 
 const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
   const [sortedEvents, setSortedEvents] = useState([]);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
     if (data?.focus) {
@@ -18,15 +21,24 @@ const Slider = () => {
   }, [data?.focus]);
 
   useEffect(() => {
+    if (!isPlaying) return;
+
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex < sortedEvents.length - 1 ? prevIndex + 1 : 0));
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [sortedEvents.length]);
+  }, [isPlaying, sortedEvents.length]);
 
   return (
     <div className="SlideCardList">
+      <div className="SliderControl">
+        {isPlaying ? (
+          <FaPauseCircle className="icon" onClick={() => setIsPlaying(false)} />
+        ) : (
+          <FaPlayCircle className="icon" onClick={() => setIsPlaying(true)} />
+        )}
+      </div>
       {sortedEvents.map((event, idx) => (
         <div
           key={event.id || idx}
