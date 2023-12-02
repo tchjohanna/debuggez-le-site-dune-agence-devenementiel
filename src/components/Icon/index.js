@@ -1,10 +1,17 @@
 /* istanbul ignore file */
+// Directive pour ignorer ce fichier lors de la couverture de code par Istanbul
+
+// Importation de PropTypes pour la validation des types de props
 import PropTypes from "prop-types";
 
+// Définition du composant Icon
 const Icon = ({ name }) => {
   let icon;
+
+  // Sélection du SVG en fonction du nom de l'icône
   switch (name) {
     case "twitch":
+      // Icône pour Twitch
       icon = (
         <path
           data-testid="icon"
@@ -71,7 +78,10 @@ const Icon = ({ name }) => {
       );
       break;
     case "close":
+      // Icône de fermeture
+      // SVG avec paths pour l'icône de fermeture
       icon = (
+        // ... (Code SVG pour l'icône de fermeture)
         <>
           <rect width="36" height="36" fill="white" />
           <path
@@ -82,8 +92,10 @@ const Icon = ({ name }) => {
       );
       break;
     default:
+      // Par défaut, aucune icône n'est définie
       icon = null
   }
+  // Rendu de l'icône SVG
   return (
     <svg
       width="36"
@@ -96,9 +108,9 @@ const Icon = ({ name }) => {
     </svg>
   );
 };
-
+// Définition des propTypes pour Icon
 Icon.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,// Nom de l'icône est requis
 }
 
 export default Icon;

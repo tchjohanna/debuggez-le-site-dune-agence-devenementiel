@@ -1,21 +1,36 @@
+// Importation de PropTypes pour la validation des types de props
 import PropTypes from "prop-types";
 
+// Importation du fichier de style Sass
 import "./style.scss";
 
+// Constante pour définir les types de boutons
 export const BUTTON_TYPES = {
   DEFAULT: 1,
   SUBMIT: 2,
 };
 
+/**
+ * Button - Un composant personnalisable pour créer des boutons.
+ * Peut être de type 'DEFAULT' ou 'SUBMIT'.
+ *
+ * @param {string} title - Texte affiché en tant qu'info-bulle.
+ * @param {function} onClick - Fonction à exécuter lors du clic sur le bouton.
+ * @param {number} type - Type du bouton (DEFAULT ou SUBMIT).
+ * @param {boolean} disabled - Si true, le bouton est désactivé.
+ * @param {node} children - Contenu du bouton.
+ */
 const Button = ({ title, onClick, type, disabled, children }) => {
+  // Switch pour déterminer le type de bouton à afficher
   switch (type) {
     case BUTTON_TYPES.DEFAULT:
+      // Bouton standard
       return (
         <button
           type="button"
           disabled={disabled}
           className="Button"
-          data-testid="button-test-id"
+          data-testid="button-test-id" // Attribut pour les tests
           onClick={onClick}
           title={title}
         >
@@ -23,6 +38,7 @@ const Button = ({ title, onClick, type, disabled, children }) => {
         </button>
       );
     case BUTTON_TYPES.SUBMIT:
+      // Bouton de soumission (submit)
       return (
         <input
           disabled={disabled}
@@ -35,6 +51,7 @@ const Button = ({ title, onClick, type, disabled, children }) => {
         />
       );
     default:
+      // Retour au bouton standard si le type n'est pas reconnu
       return (
         <button
           type="button"
@@ -50,7 +67,7 @@ const Button = ({ title, onClick, type, disabled, children }) => {
   }
 };
 
-// eslint-disable-next-line react/no-typos
+// Définition des propTypes pour la validation des types de props
 Button.propTypes = {
   title: PropTypes.string,
   onClick: PropTypes.func,
@@ -58,12 +75,14 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   children: PropTypes.node,
 };
+
+// Définition des valeurs par défaut pour les props
 Button.defaultProps = {
   disabled: false,
   onClick: () => null,
   type: BUTTON_TYPES.DEFAULT,
   title: "",
   children: null
-}
+};
 
 export default Button;

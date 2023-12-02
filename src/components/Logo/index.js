@@ -1,9 +1,19 @@
 /* istanbul ignore file */
-import PropTypes from "prop-types";
-import "./style.scss";
+// Directive pour ignorer ce fichier lors de la couverture de code par Istanbul
 
+// Importation de PropTypes pour la validation des types de props
+import PropTypes from "prop-types";
+// Importation du fichier de style Sass
+import "./style.scss";
+/**
+ * Logo - Un composant pour afficher le logo avec une taille modifiable.
+ *
+ * @param {string} size - Taille du logo ('small' ou 'large').
+ */
 const Logo = ({ size }) => (
   <div className="Logo">
+        {/* SVG du logo avec des dimensions dynamiques basées sur la prop size */}
+
     <svg
       width={size === "large" ? "196" : "101"}
       height={size === "large" ? "67" : "35"}

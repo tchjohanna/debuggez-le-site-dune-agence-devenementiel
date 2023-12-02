@@ -1,6 +1,9 @@
+// Importation de PropTypes pour la validation des types de props
 import PropTypes from "prop-types";
+// Importation d'une fonction d'aide pour obtenir le mois
 import { getMonth } from "../../helpers/Date";
 
+// Importation du fichier de style Sass
 import "./style.scss";
 
 /**
@@ -23,15 +26,18 @@ const EventCard = ({
   small = false,       // Valeur par défaut pour small
   ...props
 }) => (
+  // Structure de la carte d'événement
   <div
-    data-testid="card-testid"
-    className={`EventCard${small ? " EventCard--small" : ""}`}
-    {...props}
+    data-testid="card-testid" // Attribut pour les tests
+    className={`EventCard${small ? " EventCard--small" : ""}`} // Classe conditionnelle selon la taille
+    {...props} // Passage des props supplémentaires
   >
+    {/* Conteneur de l'image */}
     <div className="EventCard__imageContainer">
       <img data-testid="card-image-testid" src={imageSrc} alt={imageAlt} />
       <div className="EventCard__label">{label}</div>
     </div>
+    {/* Conteneur de la description */}
     <div className="EventCard__descriptionContainer">
       <div className="EventCard__title">{title}</div>
       <div className="EventCard__month">{getMonth(date)}</div>

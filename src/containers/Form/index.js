@@ -23,7 +23,7 @@ const Form = ({ onSuccess, onError }) => {
   // Gestion de la soumission du formulaire
   const sendContact = useCallback(
     async (evt) => {
-      evt.preventDefault();
+      evt.preventDefault(); // Empêcher le comportement par défaut du formulaire
       const formData = new FormData(evt.target);
       console.log(Object.fromEntries(formData)); // Afficher les données du formulaire dans la console
 
@@ -39,7 +39,7 @@ const Form = ({ onSuccess, onError }) => {
         onError(err); // Appel du callback onError avec l'erreur
       }
     },
-    [onSuccess, onError]
+    [onSuccess, onError] // Dépendances du hook useCallback
   );
 
   // Rendu du composant de formulaire
@@ -47,6 +47,7 @@ const Form = ({ onSuccess, onError }) => {
     <form onSubmit={sendContact}>
       <div className="row">
         <div className="col">
+          {/* Champs de formulaire pour le nom, prénom, type (personnel/entreprise), email */}
           <Field placeholder="" label="Nom" name="Nom" />
           <Field placeholder="" label="Prénom" name="Prénom" />
           <Select
@@ -62,15 +63,17 @@ const Form = ({ onSuccess, onError }) => {
             name="Email"
             type={FIELD_TYPES.InputEmail}
           />
+          {/* Bouton d'envoi du formulaire */}
           <Button
             type={BUTTON_TYPES.SUBMIT}
-            disabled={sending}
+            disabled={sending} // Désactivation du bouton pendant l'envoi
             onClick={onSuccess}
           >
-            {sending ? "En cours" : "Envoyer"}
+            {sending ? "En cours" : "Envoyer"} {/* Texte du bouton selon l'état d'envoi */}
           </Button>
         </div>
         <div className="col">
+          {/* Champ de formulaire pour le message */}
           <Field
             placeholder="message"
             label="Message"
@@ -83,13 +86,13 @@ const Form = ({ onSuccess, onError }) => {
   );
 };
 
-// Définition des propTypes
+// Définition des propTypes pour la validation des types de props
 Form.propTypes = {
   onError: PropTypes.func,
   onSuccess: PropTypes.func,
 };
 
-// Définition des defaultProps
+// Définition des defaultProps en cas de non-fourniture des props
 Form.defaultProps = {
   onError: () => null,
   onSuccess: () => null,

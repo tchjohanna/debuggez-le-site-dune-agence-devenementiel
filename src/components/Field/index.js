@@ -1,4 +1,6 @@
+// Importation de PropTypes pour la validation des types de props
 import PropTypes from "prop-types";
+// Importation du fichier de style Sass
 import "./style.scss";
 
 // Types de champs pour le composant Field
@@ -22,19 +24,22 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder }) => {
   // Sélection du type de composant en fonction du type de champ
   switch (type) {
     case FIELD_TYPES.INPUT_TEXT:
+      // Création d'un champ de texte
       component = (
         <input
           type="text"
           name={name}
           placeholder={placeholder}
-          data-testid="field-testid"
+          data-testid="field-testid" // Attribut pour les tests
         />
       );
       break;
     case FIELD_TYPES.TEXTAREA:
+      // Création d'une zone de texte (textarea)
       component = <textarea name={name} data-testid="field-testid" />;
       break;
     case FIELD_TYPES.InputEmail:
+      // Création d'un champ pour les adresses e-mail
       component = (
         <input
           type="email"
@@ -45,6 +50,7 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder }) => {
       );
       break;
     default:
+      // Retour par défaut à un champ de texte si le type n'est pas reconnu
       component = (
         <input
           type="text"
@@ -57,7 +63,9 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder }) => {
 
   return (
     <div className="inputField">
+      {/* Affichage de l'étiquette du champ */}
       <span>{label}</span>
+      {/* Affichage du composant de champ */}
       {component}
     </div>
   );
