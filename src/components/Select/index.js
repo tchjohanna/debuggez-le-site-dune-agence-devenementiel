@@ -69,6 +69,8 @@ const Select = ({
             e.preventDefault();
             setCollapsed(!collapsed);
           }}
+          data-testid="collapse-button-testid" // Ajouter cet attribut ici
+
         >
           <Arrow />
         </button>
