@@ -1,46 +1,45 @@
-import PropTypes from "prop-types";
-import { getMonth } from "../../helpers/Date";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { getMonth } from '../../helpers/Date';
+import './style.scss';
 
-import "./style.scss";
+const EventCard = ({ imageSrc, imageAlt = 'image', date = new Date(), title, label, small = false, ...props }) => {
+  const cardClass = `EventCard${small ? ' EventCard--small' : ''}`;
+  const month = getMonth(date);
 
-const EventCard = ({
-  imageSrc,
-  imageAlt,
-  date = new Date(),
-  title,
-  label,
-  small = false,
-  ...props
-}) => (
-  <div
-    data-testid="card-testid"
-    className={`EventCard${small ? " EventCard--small" : ""}`}
-    {...props}
-  >
-    <div className="EventCard__imageContainer">
-      <img data-testid="card-image-testid" src={imageSrc} alt={imageAlt} />
-      <div className="EventCard__label">{label}</div>
+  return (
+    <div data-testid="card-testid" className={cardClass} {...props}>
+      <ImageContainer src={imageSrc} alt={imageAlt} label={label} />
+      <DescriptionContainer title={title} month={month} />
     </div>
-    <div className="EventCard__descriptionContainer">
-      <div className="EventCard__title">{title}</div>
-      <div className="EventCard__month">{getMonth(date)}</div>
-    </div>
+  );
+};
+
+const ImageContainer = ({ src, alt, label }) => (
+  <div className="EventCard__imageContainer">
+    <img data-testid="card-image-testid" src={src} alt={alt} />
+    <div className="EventCard__label">{label}</div>
+  </div>
+);
+
+const DescriptionContainer = ({ title, month }) => (
+  <div className="EventCard__descriptionContainer">
+    <div className="EventCard__title">{title}</div>
+    <div className="EventCard__month">{month}</div>
   </div>
 );
 
 EventCard.propTypes = {
-  // eslint-disable-next-line react/require-default-props
   imageSrc: PropTypes.string,
   imageAlt: PropTypes.string,
   date: PropTypes.instanceOf(Date).isRequired,
-  // eslint-disable-next-line react/require-default-props
   title: PropTypes.string,
   small: PropTypes.bool,
   label: PropTypes.string.isRequired,
 };
 
 EventCard.defaultProps = {
-  imageAlt: "image",
+  imageAlt: 'image',
   small: false,
 };
 
